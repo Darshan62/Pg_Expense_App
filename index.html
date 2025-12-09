@@ -13,7 +13,7 @@
       <div class="app-title">PG Expense Splitter</div>
       <div class="app-subtitle">Track chai, nashta, dinner & more</div>
     </div>
-    <div class="chip">7-member group</div>
+    <div class="chip">v2 · multi-item</div>
   </header>
  
   <main class="app-main">
@@ -21,7 +21,7 @@
     <section id="screen-add" class="screen active">
       <div class="section">
         <div class="section-title">Add expense</div>
-        <div class="helper-text">Fill who paid, what, and who shared.</div>
+        <div class="helper-text">Choose who paid and add individual items for each person.</div>
       </div>
  
       <form id="addExpenseForm">
@@ -31,22 +31,15 @@
         </div>
  
         <div class="section">
-          <label for="itemInput">Item</label>
-          <input id="itemInput" type="text" placeholder="Dosa, chai, movie ticket..." />
+          <label>Items</label>
+          <div id="currentItemsList" class="item-list"></div>
+          <div id="currentItemsTotal" class="helper-text" style="margin-top:6px;">Total: ₹0.00</div>
+          <button type="button" id="openItemSheetBtn" class="button-secondary" style="margin-top:10px;">
+            + Add item
+          </button>
         </div>
  
-        <div class="section">
-          <label for="amountInput">Amount (₹)</label>
-          <input id="amountInput" type="number" min="1" step="0.5" placeholder="e.g. 120" />
-        </div>
- 
-        <div class="section">
-          <label>Consumers</label>
-          <div id="consumerCheckboxes" class="checkbox-list"></div>
-          <div class="helper-text">Select everyone who shared this expense.</div>
-        </div>
- 
-        <button type="submit" class="button-primary">Add Expense</button>
+        <button type="submit" class="button-primary">Save Expense</button>
       </form>
     </section>
  
@@ -54,7 +47,7 @@
     <section id="screen-expenses" class="screen">
       <div class="section">
         <div class="section-title">All expenses</div>
-        <div class="helper-text">Latest expenses appear on top.</div>
+        <div class="helper-text">Latest expenses appear on top. Use "Share" to send details on WhatsApp.</div>
       </div>
       <div id="expensesList"></div>
     </section>
@@ -100,6 +93,35 @@
       <span>👥</span>Members
     </div>
   </nav>
+</div>
+ 
+<!-- Bottom sheet for item input -->
+<div id="bottomSheetBackdrop" class="bottom-sheet-backdrop">
+  <div class="bottom-sheet">
+    <div class="bottom-sheet-header">
+      <div class="bottom-sheet-title">Add item</div>
+      <button id="bottomSheetCloseBtn" class="bottom-sheet-close">✕</button>
+    </div>
+ 
+    <div class="section">
+      <label for="itemNameInput">Item name</label>
+      <input id="itemNameInput" type="text" placeholder="Dosa, Poha, Tea..." />
+    </div>
+ 
+    <div class="section">
+      <label for="itemAmountInput">Amount (₹)</label>
+      <input id="itemAmountInput" type="number" min="1" step="0.5" placeholder="e.g. 100" />
+    </div>
+ 
+    <div class="section">
+      <label for="itemConsumerSelect">Consumer</label>
+      <select id="itemConsumerSelect"></select>
+    </div>
+ 
+    <div class="bottom-sheet-actions">
+      <button type="button" id="addItemToCurrentBtn" class="button-primary">Add item</button>
+    </div>
+  </div>
 </div>
  
 <script src="app.js"></script>
